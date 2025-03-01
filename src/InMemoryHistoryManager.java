@@ -1,9 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class InMemoryHistoryManager implements HistoryManager {
+public class
 
-    private final List <Task> viewHistory = new ArrayList<>(10);
+InMemoryHistoryManager implements HistoryManager {
+
+    private final List <Task> viewHistory = new ArrayList<>();
 
     @Override
     public void addToHistory(Task task) {
@@ -15,6 +16,6 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public List<Task> getHistory() {
-        return new ArrayList<>(viewHistory);
-    }
+        return new ArrayList<>(viewHistory);}
+
 }

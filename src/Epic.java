@@ -3,11 +3,10 @@ import java.util.List;
 
 public class Epic extends Task{
 
-    private List<Integer> subtaskIds;
+    private List<Integer> subtaskIds = new ArrayList<>();
 
-    public Epic(String name, String description,List<Integer> subtaskIds) {
-        super(name, description);
-        this.subtaskIds = subtaskIds;
+    public Epic(String name, String description, TaskStatus status) {
+        super(name, description, status);
     }
 
     public List<Integer> getSubtaskIds() {
@@ -16,6 +15,10 @@ public class Epic extends Task{
 
     public void setSubtaskIds(List<Integer> subtaskIds) {
         this.subtaskIds = subtaskIds;
+    }
+
+    public void addSubtaskId (int subtaskId) {
+        this.subtaskIds.add(subtaskId);
     }
 
     @Override
