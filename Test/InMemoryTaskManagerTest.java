@@ -1,3 +1,4 @@
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -164,8 +165,7 @@ class InMemoryTaskManagerTest {
         taskManager.getEpic(epicId1);
         taskManager.getTask(taskId2);
         taskManager.getEpic(epicId2);
-        taskManager.getSubtask(epicId1);//обратите внимание на этот момент, когда возвращаешь подзадачу по subtaskId, то
-        //размер истории просомтров увеливается еще на 1, т.е. size не 5, а 6. Помогите разобраться
+        taskManager.getSubtask(subtaskId);
 
         List <Task> viewHistory =taskManager.getHistory();
 
@@ -187,15 +187,27 @@ class InMemoryTaskManagerTest {
         testTask.setDescription("New Description");
         testTask.setStatus(TaskStatus.IN_PROGRESS);
 
-
-
         assertEquals(1,history.size(), "История должна содержать одну задачу");
 
         Task taskHistory = history.get(0);
 
-        assertEquals("Test addNewTask", taskHistory.getName(), "Имена задач не совпадают");
+        assertEquals("Test addNewTask", taskHistory.getName(), "Имена задач совпадают");
+        assertEquals("Test addNewTask description", taskHistory.getDescription(),"Описание задач не должны совпадать");
 
+    }
 
+    @Test
+    void shouldReturnImmutableAfterAddingToManager () {
+        taskManager = new InMemoryTaskManager();
+        Task task = new Task("Test addNewTask", "Test addNewTask description", TaskStatus.NEW);
+        int taskId = taskManager.addTask(task);
+
+        Task taskCopy = taskManager.getTask(taskId);
+
+        assertNotNull(taskCopy, "Задача не найдена");
+        assertEquals("Test addNewTask", taskCopy.getName(), "Имена задач несовпадают");
+        assertEquals("Test addNewTask description", taskCopy.getDescription(), "Описание задач не совпадают");
+        assertEquals(TaskStatus.NEW, taskCopy.getStatus(), "Статусы задач не совпадают");
     }
 
     @Test

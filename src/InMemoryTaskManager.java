@@ -20,13 +20,12 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public int addSubtask(Subtask subtask) {
         subtask.setId(idCounter++);
-        subtasks.put(subtask.getId(),subtask);
+        subtasks.put(subtask.getId(), subtask);
 
         Epic epic = epics.get(subtask.getEpicId());
         if (epic != null && epic.getId() != subtask.getId()) {
             epic.addSubtaskId(subtask.getId());
         }
-        historyManager.addToHistory(subtask);
         return subtask.getId();
     }
 
@@ -40,38 +39,35 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Task getTask(int id) {
         if (tasks.containsKey(id)) {
-            Task taskOriginal = tasks.get(id);
-            Task taskCopy = new Task(taskOriginal.getName(),taskOriginal.getDescription(),taskOriginal.getStatus());
-            taskCopy.setId(taskOriginal.getId());
-            historyManager.addToHistory(taskCopy);
-            return taskCopy;
+            Task task = tasks.get(id);
+            historyManager.addToHistory(task);
+            return task;
         }
         return null;
     }
 
+
     @Override
     public Subtask getSubtask(int id) {
-        if (subtasks.containsKey(id)) {
-            Subtask subtaskOriginal = subtasks.get(id);
-            Subtask subtaskCopy = new Subtask(subtaskOriginal.getName(),subtaskOriginal.getDescription(),subtaskOriginal.getStatus());
-            subtaskCopy.setId(subtaskOriginal.getId());
-            historyManager.addToHistory(subtaskCopy);
-            return subtaskCopy;
+            if (subtasks.containsKey(id)) {
+                Subtask subtask = subtasks.get(id);
+                historyManager.addToHistory(subtask);
+                return subtask;
+            }
+            return null;
         }
-        return null;
-    }
+
 
     @Override
     public Epic getEpic(int id) {
         if (epics.containsKey(id)) {
-            Epic epicOriginal = epics.get(id);
-            Epic epicCopy = new Epic(epicOriginal.getName(),epicOriginal.getDescription(),epicOriginal.getStatus());
-            epicCopy.setId(epicOriginal.getId());
-            historyManager.addToHistory(epicCopy);
-            return epicCopy;
+            Epic epic = epics.get(id);
+            historyManager.addToHistory(epic);
+            return epic;
         }
         return null;
     }
+
 
     @Override
     public List<Subtask> getEpicSubtasks(int epicId) {
@@ -222,7 +218,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public List<Task> getHistory () {
+    public List<Task> getHistory() {
         return historyManager.getHistory();
     }
 
