@@ -48,7 +48,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         } else {
             head = node.next;//если нет то этот узел становится head
         }
-        if (node.next != null) {//есть след узел?
+        if (node.next != null) {
             node.next.prev = node.prev;//если да, то последующий узел указывает на предыдущий перед удаляемым
         } else {
             tail = node.prev;//если нет, то следующий узел становится хвостом
