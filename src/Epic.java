@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Epic extends Task{
+public class Epic extends Task {
 
     private List<Integer> subtaskIds = new ArrayList<>();
 
@@ -17,20 +17,13 @@ public class Epic extends Task{
         this.subtaskIds = subtaskIds;
     }
 
-    public void addSubtaskId (int subtaskId) {
+    public void addSubtaskId(int subtaskId) {
         this.subtaskIds.add(subtaskId);
     }
 
     @Override
     public String toString() {
-        return "Epic{" +
-                "name='" + getName() + '\'' +
-                ", description='" + getDescription() + '\'' +
-                ", id=" + getId() +
-                ", status=" + getStatus() +
-                "subtaskIds=" + subtaskIds +
-                '}';
+        return "Epic{" + "name='" + getName() + '\'' + ", description='" + getDescription() + '\'' + ", id=" + getId() +
+                ", status=" + getStatus() + "subtaskIds=" + subtaskIds + '}';
     }
-
-
 }
