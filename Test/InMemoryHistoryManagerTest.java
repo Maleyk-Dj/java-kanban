@@ -14,7 +14,7 @@ class InMemoryHistoryManagerTest {
     private Task task3;
 
     @BeforeEach
-    void beforeEach () {
+    void beforeEach() {
         historyManager = new InMemoryHistoryManager();
         task1 = new Task("Task 1", "Task description 1", TaskStatus.NEW);
         task1.setId(1);
@@ -25,63 +25,63 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    void addToHistory_shouldAddTaskToHistory () {
+    void addToHistory_shouldAddTaskToHistory() {
         historyManager.addToHistory(task1);
-        List <Task> history = historyManager.getHistory();
+        List<Task> history = historyManager.getHistory();
         assertNotNull(history);
-        assertEquals(1,history.size());
+        assertEquals(1, history.size());
         assertEquals(task1.getId(), history.get(0).getId());
     }
 
     @Test
-    void addToHistory_shouldAddCopyOfTaskToHistory () {
+    void addToHistory_shouldAddCopyOfTaskToHistory() {
         historyManager.addToHistory(task1);
-        List <Task> history = historyManager.getHistory();
+        List<Task> history = historyManager.getHistory();
         Task taskFromHistory = history.get(0);
         taskFromHistory.setName("Задача2");
-        assertNotEquals(task1.getName(),taskFromHistory.getName());
+        assertNotEquals(task1.getName(), taskFromHistory.getName());
 
     }
 
     @Test
-    void addToHistory_shouldNotAddNullTask () {
+    void addToHistory_shouldNotAddNullTask() {
         historyManager.addToHistory(null);
-        List <Task> history = historyManager.getHistory();
+        List<Task> history = historyManager.getHistory();
         assertNotNull(history);
         assertTrue(history.isEmpty());
     }
 
     @Test
-    void addToHistory_shouldMoveTheRepeatedTaskToTheEnd () {
+    void addToHistory_shouldMoveTheRepeatedTaskToTheEnd() {
         historyManager.addToHistory(task1);
         historyManager.addToHistory(task2);
         historyManager.addToHistory(task1);
 
-        List <Task> history = historyManager.getHistory();
+        List<Task> history = historyManager.getHistory();
 
-        assertEquals(task1.getId(),history.get(1).getId());
-        assertEquals(2,history.size());
+        assertEquals(task1.getId(), history.get(1).getId());
+        assertEquals(2, history.size());
     }
 
     @Test
-    void remove_shouldRemoveTaskToHistiry () {
+    void remove_shouldRemoveTaskToHistiry() {
         historyManager.addToHistory(task2);
         historyManager.addToHistory(task3);
         historyManager.remove(task2.getId());
-        List <Task> history = historyManager.getHistory();
+        List<Task> history = historyManager.getHistory();
         assertEquals(1, history.size());
     }
 
     @Test
-    void getHistory_shouldReturnTheCorrectOrder () {
+    void getHistory_shouldReturnTheCorrectOrder() {
         historyManager.addToHistory(task3);
         historyManager.addToHistory(task1);
         historyManager.addToHistory(task2);
-        List <Task> history = historyManager.getHistory();
-        assertEquals(3,history.size());
-        assertEquals(task3.getId(),history.get(0).getId());
-        assertEquals(task1.getId(),history.get(1).getId());
-        assertEquals(task2.getId(),history.get(2).getId());
+        List<Task> history = historyManager.getHistory();
+        assertEquals(3, history.size());
+        assertEquals(task3.getId(), history.get(0).getId());
+        assertEquals(task1.getId(), history.get(1).getId());
+        assertEquals(task2.getId(), history.get(2).getId());
     }
 
-    }
+}

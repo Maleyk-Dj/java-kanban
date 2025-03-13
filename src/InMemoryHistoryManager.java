@@ -17,28 +17,29 @@ public class InMemoryHistoryManager implements HistoryManager {
                     '}';
         }
     }
+
     //реализуем двухсвязный список
     private Node head;
     private Node tail;
     private int size;
 
     //далее хеш-таблицу
-    private final Map <Integer,Node> myTaskMap = new HashMap<>();
+    private final Map<Integer, Node> myTaskMap = new HashMap<>();
 
-    private void linkLast (Task task) {
+    private void linkLast(Task task) {
         Node newNode = new Node(task);
-        if (head==null) {//если в списке нет головы
+        if (head == null) {//если в списке нет головы
             head = newNode;//то новая нода становится головой
         } else {
             tail.next = newNode;//если список не пуст, устанавливаем двухсторонние связи
             newNode.prev = tail;
         }
         tail = newNode;//теперь новая нода стала хвостом
-        myTaskMap.put(task.getId(),newNode);
+        myTaskMap.put(task.getId(), newNode);
         size++;
     }
 
-    private void removeNode (Node node) {
+    private void removeNode(Node node) {
         if (node == null) {
             return;
         }
@@ -59,11 +60,11 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void addToHistory (Task task) {
+    public void addToHistory(Task task) {
         if (task == null) {
             return;
         }
-        Task taskCopy = new Task(task.getName(),task.getDescription(),task.getStatus());//создаем копию
+        Task taskCopy = new Task(task.getName(), task.getDescription(), task.getStatus());//создаем копию
         taskCopy.setId(task.getId());//устанавливаем в ID копии ID задачи
         int taskId = task.getId();//получаем ID задачи
         if (myTaskMap.containsKey(taskId)) {
@@ -73,7 +74,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void remove (int id) {
+    public void remove(int id) {
         if (myTaskMap.containsKey(id)) {
             removeNode(myTaskMap.get(id));
         }
@@ -81,7 +82,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public List<Task> getHistory() {
-        List <Task> history = new ArrayList<>();
+        List<Task> history = new ArrayList<>();
         Node current = head;
         while (current != null) {
             history.add(current.task);

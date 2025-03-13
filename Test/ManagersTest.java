@@ -9,14 +9,14 @@ class ManagersTest {
         HistoryManager historyManager = new InMemoryHistoryManager();
         TaskManager taskManager = Managers.getDefault();
 
-        assertNotNull(taskManager,"taskmanager равен null");
+        assertNotNull(taskManager, "taskmanager равен null");
 
-        assertTrue (taskManager instanceof  InMemoryTaskManager, "taskmanager не является экземпляром класса " +
+        assertTrue(taskManager instanceof InMemoryTaskManager, "taskmanager не является экземпляром класса " +
                 "InMemoryTaskManager");
         assertTrue(taskManager.getAllTasks().isEmpty(), "Список задач при инициализации не пуст");
         assertTrue(taskManager.getAllEpics().isEmpty(), "Список эпиков при инициализации не пуст");
         assertTrue(taskManager.getAllSubtasks().isEmpty(), "Список подзадач при инициализации не пуст");
-        assertEquals(0,historyManager.getHistory().size(), "История просмотров при инициализации не пустая");
+        assertEquals(0, historyManager.getHistory().size(), "История просмотров при инициализации не пустая");
 
     }
 
@@ -26,7 +26,7 @@ class ManagersTest {
 
         assertNotNull(historyManager, "historyManager равен null");
         assertTrue(historyManager instanceof InMemoryHistoryManager, "historyManager не является экземпляром класса " +
-                "InMemoryTaskManager" );
-        assertEquals(0,historyManager.getHistory().size(), "История просмотров при инициализации не пустая");
+                "InMemoryTaskManager");
+        assertEquals(0, historyManager.getHistory().size(), "История просмотров при инициализации не пустая");
     }
 }
