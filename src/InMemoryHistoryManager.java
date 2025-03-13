@@ -28,9 +28,9 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     private void linkLast(Task task) {
         Node newNode = new Node(task);
-        if(head == null){//если в списке нет головы
+        if (head == null) {//если в списке нет головы
             head = newNode;//то новая нода становится головой
-        }else{
+        } else {
             tail.next = newNode;//если список не пуст, устанавливаем двухсторонние связи
             newNode.prev = tail;
         }
@@ -43,14 +43,14 @@ public class InMemoryHistoryManager implements HistoryManager {
         if (node == null) {
             return;
         }
-        if(node.prev != null){//есть prev узел?
+        if (node.prev != null) {//есть prev узел?
             node.prev.next = node.next;//если да, предыидущий узел указывает на следующий за удаляемым
-        }else{
+        } else {
             head = node.next;//если нет то этот узел становится head
         }
-        if(node.next != null){//есть след узел?
+        if (node.next != null) {//есть след узел?
             node.next.prev = node.prev;//если да, то последующий узел указывает на предыдущий перед удаляемым
-        }else{
+        } else {
             tail = node.prev;//если нет, то следующий узел становится хвостом
         }
         node.prev = null;
@@ -61,7 +61,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void addToHistory(Task task) {
-        if(task == null){
+        if (task == null) {
             return;
         }
         Task taskCopy = new Task(task.getName(), task.getDescription(), task.getStatus());//создаем копию
@@ -74,17 +74,17 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void remove(int id){
+    public void remove(int id) {
         if (myTaskMap.containsKey(id)) {
             removeNode(myTaskMap.get(id));
         }
     }
 
     @Override
-    public List<Task> getHistory(){
+    public List<Task> getHistory() {
         List<Task> history = new ArrayList<>();
         Node current = head;
-        while (current != null){
+        while (current != null) {
             history.add(current.task);
             current = current.next;
         }
