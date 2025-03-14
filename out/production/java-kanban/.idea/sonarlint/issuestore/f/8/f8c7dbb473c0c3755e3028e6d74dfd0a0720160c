@@ -1,0 +1,21 @@
+
+J
+java:S1066J"/Merge this if statement with the enclosing one.(øİşÌùÿÿÿÿ
+†
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Ù¡øŒ
+†
+java:S1319^"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Â†
+†
+java:S1319j"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÚêÈ
+‡
+java:S1319’"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Öº£
+0
+java:S1220""Move this file to a named package.
+Q
+java:S2696"6Make the enclosing method "static" or remove this set.(–ıñÍÿÿÿÿÿ
+Q
+java:S26963"6Make the enclosing method "static" or remove this set.(ÌŞäüÿÿÿÿ
+L
+java:S2696|"6Make the enclosing method "static" or remove this set.(èƒì³
+E
+java:S1481—")Remove this unused "epic" local variable.(µ¨î²úÿÿÿÿ
