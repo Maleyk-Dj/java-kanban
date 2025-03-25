@@ -60,7 +60,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void addToHistory(Task task) {
+    public void addToHistory(TaskAbstract task) {
         if (task == null) {
             return;
         }

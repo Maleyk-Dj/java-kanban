@@ -13,9 +13,9 @@ class ManagersTest {
 
         assertTrue(taskManager instanceof InMemoryTaskManager, "taskmanager не является экземпляром класса " +
                 "InMemoryTaskManager");
-        assertTrue(taskManager.getAllTasks().isEmpty(), "Список задач при инициализации не пуст");
+        assertTrue(taskManager.getTasks().isEmpty(), "Список задач при инициализации не пуст");
         assertTrue(taskManager.getAllEpics().isEmpty(), "Список эпиков при инициализации не пуст");
-        assertTrue(taskManager.getAllSubtasks().isEmpty(), "Список подзадач при инициализации не пуст");
+        assertTrue(taskManager.getSubtasks().isEmpty(), "Список подзадач при инициализации не пуст");
         assertEquals(0, historyManager.getHistory().size(), "История просмотров при инициализации не пустая");
 
     }

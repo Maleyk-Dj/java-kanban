@@ -20,7 +20,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedTask, "Задача не найдена.");
         assertEquals(task, savedTask, "Задачи не совпадают.");
 
-        final List<Task> tasks = taskManager.getAllTasks();
+        final List<Task> tasks = taskManager.getTasks();
         assertNotNull(tasks, "Задачи не возвращаются.");
         assertEquals(1, tasks.size(), "Неверное количество задач.");
         assertEquals(task, tasks.get(0), "Задачи не совпадают.");
@@ -218,7 +218,7 @@ class InMemoryTaskManagerTest {
         Task task1 = new Task("Task 1", "Task description 1", TaskStatus.NEW);
         int taskId = taskManager.addTask(task1);
         taskManager.removeTask(taskId);
-        List<Task> tasks = taskManager.getAllTasks();
+        List<Task> tasks = taskManager.getTasks();
 
         assertEquals(0, tasks.size(), "Задача не удалилась");
     }

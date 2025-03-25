@@ -9,9 +9,11 @@ public interface TaskManager {
 
     Task getTask(int id);
 
-    List<Task> getAllTasks();
+    List<Task> getTasks();
 
     void updateTask(Task task);
+
+    void updateEpic(Epic epic);
 
     int addSubtask(Subtask subtask);
 
@@ -21,7 +23,7 @@ public interface TaskManager {
 
     Subtask getSubtask(int id);
 
-    List<Subtask> getAllSubtasks();
+    List<Subtask> getSubtasks();
 
     void removeAllSubtasks();
 
