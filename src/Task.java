@@ -1,6 +1,9 @@
+import java.io.Serializable;
 import java.util.Objects;
+import java.io.Serializable;
 
-public class Task {
+
+public class Task extends TaskAbstract implements Serializable {
 
     private String name;
     private String description;
@@ -8,57 +11,12 @@ public class Task {
     private TaskStatus status;
 
     public Task(String name, String description, TaskStatus status) {
-        this.name = name;
-        this.description = description;
-        this.status = TaskStatus.NEW;
-
+        super(TaskType.TASK, name, description, status);
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public TaskStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TaskStatus status) {
-        this.status = status;
-    }
-
-    public boolean isSubtask() {
-        return false;
-    }
-
 
     @Override
-    public String toString() {
-        return "Task{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
-                ", status=" + status +
-                '}';
+    public String toCSV() {
+        return String.format("%d,%s,%s,%s,%s,", getId(), getType(), getName(), getStatus(), getDescription());
     }
 
     @Override
@@ -72,5 +30,16 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", type=" + getType() +
+                ", description='" + getDescription() + '\'' +
+                ", status=" + getStatus() +
+                '}';
     }
 }
