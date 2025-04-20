@@ -1,45 +1,41 @@
 import java.io.Serializable;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.io.Serializable;
 
 
 public class Task extends TaskAbstract implements Serializable {
 
-    private String name;
-    private String description;
-    private int id;
-    private TaskStatus status;
+    public Task(TaskType type, String name, String description) {
+        this.type = type;
+        this.name = name;
+        this.description = description;
+    }
 
-    public Task(String name, String description, TaskStatus status) {
-        super(TaskType.TASK, name, description, status);
+    public Task(TaskType type, String name, String description, LocalDateTime startTime, Duration duration) {
+        this(type, name, description);
+        this.startTime = startTime;
+        this.duration = duration;
     }
 
     @Override
     public String toCSV() {
-        return String.format("%d,%s,%s,%s,%s,", getId(), getType(), getName(), getStatus(), getDescription());
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Task task = (Task) object;
-        return id == task.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+        String startTimeStr = startTime != null ? startTime.toString() : "";
+        String durationStr = duration != null ? String.valueOf(duration.toMinutes()) : "";
+        return String.format("%d,%s,%s,%s,%s,,%s,%s,", id, type, name, status, description, durationStr, startTimeStr);
     }
 
     @Override
     public String toString() {
         return "Task{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
-                ", type=" + getType() +
-                ", description='" + getDescription() + '\'' +
-                ", status=" + getStatus() +
+                "id=" + id +
+                ", type=" + type +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", duration=" + duration +
+                ", startTime=" + startTime +
                 '}';
     }
 }

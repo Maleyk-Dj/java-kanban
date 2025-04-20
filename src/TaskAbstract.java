@@ -1,3 +1,5 @@
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public abstract class TaskAbstract {
@@ -6,15 +8,10 @@ public abstract class TaskAbstract {
     protected TaskType type;
     protected String name;
     protected String description;
-    protected TaskStatus status;
+    protected TaskStatus status = TaskStatus.NEW;
+    protected Duration duration;
+    protected LocalDateTime startTime;
 
-
-    protected TaskAbstract(TaskType type, String name, String description, TaskStatus status) {
-        this.type = type;
-        this.name = name;
-        this.description = description;
-        this.status = status;
-    }
 
     public int getId() {
         return id;
@@ -24,16 +21,20 @@ public abstract class TaskAbstract {
         this.id = id;
     }
 
+    public TaskType getType() {
+        return type;
+    }
+
+    public void setType(TaskType type) {
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public TaskType getType() {
-        return type;
     }
 
     public String getDescription() {
@@ -52,24 +53,50 @@ public abstract class TaskAbstract {
         this.status = status;
     }
 
-    public abstract String toCSV();
+    public Duration getDuration() {
+        return duration;
+    }
 
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return startTime != null ? startTime.plus(duration) : null;
+    }
+
+    public abstract String toCSV();
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         TaskAbstract that = (TaskAbstract) object;
-        return id == that.id;
+        return id == that.id && type == that.type && Objects.equals(name, that.name) && Objects.equals(description, that.description) && status == that.status && Objects.equals(duration, that.duration) && Objects.equals(startTime, that.startTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
-        return "TaskAbstract{" + "id=" + id + ", name='" + name + '\'' + ", type=" + type + ", description='" + description + '\'' + ", status=" + status + '}';
+        return "TaskAbstract{" +
+                "id=" + id +
+                ", type=" + type +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", duration=" + duration +
+                ", startTime=" + startTime +
+                '}';
     }
 }
