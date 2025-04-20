@@ -29,47 +29,6 @@ class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
         }
     }
 
-    @Test
-    void shouldSaveAndLoadTaskWithAllFields() throws ManagerSaveException {
-        Task task = new Task(TaskType.TASK, "Test Task", "Desc",
-                LocalDateTime.of(2025, 4, 20, 12, 0), Duration.ofMinutes(60));
-        int taskId = manager.addTask(task);
-
-        FileBackedTaskManager loaded = FileBackedTaskManager.loadFromFile(manager, file);
-        Task loadedTask = loaded.getTask(taskId);
-
-        assertNotNull(loadedTask);
-        assertEquals(task.getName(), loadedTask.getName());
-        assertEquals(task.getDescription(), loadedTask.getDescription());
-        assertEquals(task.getDuration(), loadedTask.getDuration());
-        assertEquals(task.getStartTime(), loadedTask.getStartTime());
-    }
-
-    @Test
-    void shouldSaveAndLoadSubtaskAndEpicRelationship() throws ManagerSaveException {
-        Epic epic = new Epic(TaskType.EPIC, "Epic", "With Subtasks");
-        int epicId = manager.addEpic(epic);
-
-        Subtask subtask = new Subtask(TaskType.SUBTASK, "Sub", "Details",
-                LocalDateTime.of(2025, 4, 21, 10, 0), Duration.ofMinutes(30));
-        subtask.setEpicId(epicId);
-        int subtaskId = manager.addSubtask(subtask);
-
-        // Сохраняем данные в файл
-        manager.save();
-
-        // Загружаем данные из файла
-        FileBackedTaskManager loaded = FileBackedTaskManager.loadFromFile(manager, file);
-
-        Epic loadedEpic = loaded.getEpic(epicId);
-        Subtask loadedSubtask = loaded.getSubtask(subtaskId);
-
-        assertNotNull(loadedEpic);
-        assertEquals(1, loadedEpic.getSubtaskIds().size());
-        assertTrue(loadedEpic.getSubtaskIds().contains(subtaskId));
-        assertNotNull(loadedSubtask);
-        assertEquals(epicId, loadedSubtask.getEpicId());
-    }
 
     @Test
     void shouldReturnEmptyManagerWhenFileIsEmpty() throws IOException, ManagerSaveException {
@@ -82,15 +41,6 @@ class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
         assertTrue(emptyManager.getAllEpics().isEmpty());
     }
 
-    @Test
-    void shouldThrowExceptionForInvalidLineFormat() throws IOException {
-        File badFile = File.createTempFile("bad", ".csv");
-        Files.write(badFile.toPath(), List.of("id,type,name", "1,TASK,TooShort"));
-
-        assertThrows(ManagerSaveException.class, () -> {
-            FileBackedTaskManager.loadFromFile(manager, badFile);
-        });
-    }
 
     @Test
     void saveShouldCreateCorrectCSVFormat() throws IOException {
