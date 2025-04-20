@@ -1,9 +1,6 @@
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.io.Serializable;
-
 
 public class Task extends TaskAbstract implements Serializable {
 
