@@ -3,7 +3,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
-;
+
 public class InMemoryTaskManager implements TaskManager {
     protected Map<Integer, Task> tasks = new HashMap<>();
     protected Map<Integer, Subtask> subtasks = new HashMap<>();
@@ -206,8 +206,8 @@ public class InMemoryTaskManager implements TaskManager {
         if (newTask.getStartTime() == null) return false;
         return prioritizedTasks.stream()
                 .filter(task -> task.getStartTime() != null && task.getEndTime() != null)
-                .anyMatch(existing -> !existing.equals(newTask) && newTask.getStartTime().isBefore
-                        (existing.getEndTime()) && newTask.getEndTime().isAfter(existing.getStartTime()));
+                .anyMatch(existing -> !existing.equals(newTask) && newTask.getStartTime().isBefore(existing.getEndTime())
+                        && newTask.getEndTime().isAfter(existing.getStartTime()));
     }
 
     protected void updateEpicTimeAndStatus(Epic epic) {
