@@ -4,16 +4,16 @@ import java.time.LocalDateTime;
 
 public class Task extends TaskAbstract implements Serializable {
 
-    public Task(String name, String description,TaskStatus status) {
+    public Task(String name, String description, TaskStatus status) {
         this.name = name;
         this.description = description;
-        this.status=status;
+        this.status = status;
     }
 
-    public Task(String name,String description,TaskStatus status,Duration duration,LocalDateTime startTime) {
-        this(name,description,status);
-        this.duration=duration;
-        this.startTime=startTime;
+    public Task(String name, String description, TaskStatus status, Duration duration, LocalDateTime startTime) {
+        this(name, description, status);
+        this.duration = duration;
+        this.startTime = startTime;
     }
 
     @Override
