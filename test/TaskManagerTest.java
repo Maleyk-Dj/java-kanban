@@ -67,25 +67,24 @@ abstract class TaskManagerTest <T extends TaskManager> {
 
     @Test
     void shouldRemoveTasksAndSubtasksAndEpics() {
-        Task task = new Task( "Task", "Task Desc",TaskStatus.IN_PROGRESS, Duration.ofMinutes(10),
+        Task task = new Task("Task", "Task Desc", TaskStatus.IN_PROGRESS, Duration.ofMinutes(10),
                 LocalDateTime.of(2025, 1, 1, 10, 0));
         int taskId = manager.addTask(task);
 
-        Epic epic = new Epic("Epic", "Epic Desc",TaskStatus.IN_PROGRESS);
+        Epic epic = new Epic("Epic", "Epic Desc", TaskStatus.IN_PROGRESS);
         int epicId = manager.addEpic(epic);
 
-        Subtask subtask = new Subtask("Sub", "Sub Desc",TaskStatus.NEW,epicId, Duration.ofMinutes(10), LocalDateTime.of
-                (2025, 1, 1, 11, 0)); // на час позже
-        subtask.setEpicId(epicId);
+        Subtask subtask = new Subtask("Sub", "Sub Desc", TaskStatus.NEW, epicId,
+                Duration.ofMinutes(10), LocalDateTime.of(2025, 1, 1, 11, 0));
         int subId = manager.addSubtask(subtask);
 
         manager.removeTask(taskId);
         manager.removeSubtask(subId);
         manager.removeEpic(epicId);
 
-        assertNull(manager.getTask(taskId));
-        assertNull(manager.getSubtask(subId));
-        assertNull(manager.getEpic(epicId));
+        assertThrows(NotFoundException.class, () -> manager.getTask(taskId));
+        assertThrows(NotFoundException.class, () -> manager.getSubtask(subId));
+        assertThrows(NotFoundException.class, () -> manager.getEpic(epicId));
     }
 
     @Test
