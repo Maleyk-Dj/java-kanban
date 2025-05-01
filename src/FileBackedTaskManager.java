@@ -145,7 +145,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
 
         switch (type) {
             case TASK -> {
-                Task task = new Task(TaskType.TASK, name, description, startTime, duration);
+                Task task = new Task(name, description,status, duration,startTime);
                 task.setStatus(status);
                 task.setId(id);
                 taskAbstract = task;
@@ -155,14 +155,14 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
                     throw new ManagerSaveException("Неверный формат строки подзадачи: отсутствует epicId: " + value);
                 }
                 int epicId = Integer.parseInt(data[7]);
-                Subtask subtask = new Subtask(TaskType.SUBTASK, name, description, startTime, duration);
+                Subtask subtask = new Subtask(name, description,status,epicId, duration,startTime);
                 subtask.setStatus(status);
                 subtask.setId(id);
                 subtask.setEpicId(epicId);
                 taskAbstract = subtask;
             }
             case EPIC -> {
-                Epic epic = new Epic(TaskType.EPIC, name, description);
+                Epic epic = new Epic(name, description,status);
                 epic.setStatus(status);
                 epic.setId(id);
                 epic.setStartTime(startTime); // может быть null — норм

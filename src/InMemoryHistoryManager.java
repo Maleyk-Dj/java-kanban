@@ -64,7 +64,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         if (task == null) {
             return;
         }
-        Task taskCopy = new Task(task.getType(), task.getName(), task.getDescription());//создаем копию
+        Task taskCopy = new Task(task.getName(), task.getDescription(),task.getStatus());//создаем копию
         taskCopy.setId(task.getId());//устанавливаем в ID копии ID задачи
         int taskId = task.getId();//получаем ID задачи
         if (myTaskMap.containsKey(taskId)) {
