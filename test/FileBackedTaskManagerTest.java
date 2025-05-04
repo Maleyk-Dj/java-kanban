@@ -44,8 +44,8 @@ class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
 
     @Test
     void saveShouldCreateCorrectCSVFormat() throws IOException {
-        Task task = new Task(TaskType.TASK, "Test Save", "CSV Format",
-                LocalDateTime.of(2025, 4, 22, 15, 0), Duration.ofMinutes(45));
+        Task task = new Task("Test Save", "CSV Format",TaskStatus.NEW, Duration.ofMinutes(45) ,
+                LocalDateTime.of(2025, 4, 22, 15, 0));
         manager.addTask(task);
 
         List<String> lines = Files.readAllLines(file.toPath());

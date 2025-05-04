@@ -8,7 +8,7 @@ public abstract class TaskAbstract {
     protected TaskType type;
     protected String name;
     protected String description;
-    protected TaskStatus status = TaskStatus.NEW;
+    protected TaskStatus status;
     protected Duration duration;
     protected LocalDateTime startTime;
 

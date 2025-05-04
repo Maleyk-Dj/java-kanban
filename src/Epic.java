@@ -10,11 +10,10 @@ public class Epic extends TaskAbstract implements Serializable {
     private List<Integer> subtaskIds = new ArrayList<>();
     public LocalDateTime endTime;
 
-    public Epic(TaskType type, String name, String description) {
-        this.type = type;
+    public Epic(String name, String description, TaskStatus status) {
         this.name = name;
         this.description = description;
-        this.status = TaskStatus.NEW;
+        this.status = status;
     }
 
     public List<Integer> getSubtaskIds() {

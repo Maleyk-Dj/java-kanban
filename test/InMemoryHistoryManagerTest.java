@@ -16,11 +16,11 @@ class InMemoryHistoryManagerTest {
     @BeforeEach
     void beforeEach() {
         historyManager = new InMemoryHistoryManager();
-        task1 = new Task(TaskType.TASK, "Task description 1", "Description");
+        task1 = new Task("Task description 1", "Description",TaskStatus.NEW);
         task1.setId(1);
-        task2 = new Task(TaskType.TASK, "Task description 2", "Description2");
+        task2 = new Task("Task description 2", "Description2",TaskStatus.NEW);
         task2.setId(2);
-        task3 = new Task(TaskType.TASK, "Task description 3", "Description3");
+        task3 = new Task("Task description 3", "Description3",TaskStatus.NEW);
         task3.setId(3);
     }
 

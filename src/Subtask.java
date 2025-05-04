@@ -6,16 +6,17 @@ import java.time.LocalDateTime;
 public class Subtask extends TaskAbstract implements Serializable {
     private int epicId;
 
-    public Subtask(TaskType type, String name, String description) {
-        this.type = type;
+    public Subtask(String name, String description, int epicId, TaskStatus status) {
         this.name = name;
         this.description = description;
+        this.epicId = epicId;
+        this.status = status;
     }
 
-    public Subtask(TaskType type, String name, String description, LocalDateTime starTime, Duration duration) {
-        this(type, name, description);
-        this.startTime = starTime;
+    public Subtask(String name, String description, TaskStatus status, int epicId, Duration duration, LocalDateTime starTime) {
+        this(name, description, epicId, status);
         this.duration = duration;
+        this.startTime = starTime;
     }
 
     @Override
